@@ -1,24 +1,24 @@
 version: '3.8'
 services:
-  app:
-    build: .
-    ports:
-      - '3000:3000'
-    environment:
-      - DATABASE_URL=postgresql://admin:pass@123@postgres-db:5432/test_db
-      - JWT_SECRET=super-secret
-      - PORT=3000
-    depends_on:
-      - postgres-db
-    entrypoint:
-      - sh
-      - -c
-      - |
-        until nc -z postgres-db 5432; do
-          echo "Waiting for PostgreSQL to be ready...";
-          sleep 1;
-        done;
-        npx drizzle-kit migrate && npm start
+  # app:
+  #   build: .
+  #   ports:
+  #     - '3000:3000'
+  #   environment:
+  #     - DATABASE_URL=postgresql://admin:pass@123@postgres-db:5432/test_db
+  #     - JWT_SECRET=super-secret
+  #     - PORT=3000
+  #   depends_on:
+  #     - postgres-db
+  #   entrypoint:
+  #     - sh
+  #     - -c
+  #     - |
+  #       until nc -z postgres-db 5432; do
+  #         echo "Waiting for PostgreSQL to be ready...";
+  #         sleep 1;
+  #       done;
+  #       npx drizzle-kit migrate && npm start
 
   postgres-db:
     image: postgres:13.5
