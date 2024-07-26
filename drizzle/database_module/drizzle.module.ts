@@ -10,7 +10,8 @@ import * as schema from './schema';
       provide: 'DRIZZLE',
       useFactory: () => {
         const pool = new Pool({
-          // connectionString: "postgresql://admin:pass@123@localhost:5434/test_db",
+          // connectionString:
+          //   'postgresql://admin:pass@123@localhost:5434/test_db',
           connectionString:
             'postgres://admin:pass@123@postgres-db:5432/test_db',
         });
