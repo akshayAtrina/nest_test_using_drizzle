@@ -1,28 +1,26 @@
 version: '3.8'
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: nestjs-app
-    working_dir: /usr/src/app
+    build: .
     ports:
       - '3000:3000'
     environment:
-      DATABASE_URL: ${DATABASE_URL}
-      JWT_SECRET: ${JWT_SECRET}
+      - DATABASE_URL=postgresql://admin:pass@123@postgres-db:5432/test_db
+      - JWT_SECRET=super-secret
+      - PORT=3000
     depends_on:
-      - db
+      - postgres-db
 
-  db:
+  postgres-db:
     image: postgres:13.5
-    container_name: postgres-db
-    restart: always
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: pass@123
       POSTGRES_DB: test_db
     ports:
-      - '5434:5432'
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
 volumes:
-  postgres:
+  postgres-data:
