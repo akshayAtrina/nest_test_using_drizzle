@@ -10,6 +10,15 @@ services:
       - PORT=3000
     depends_on:
       - postgres-db
+    entrypoint:
+      - sh
+      - -c
+      - |
+        until nc -z postgres-db 5432; do
+          echo "Waiting for PostgreSQL to be ready...";
+          sleep 1;
+        done;
+        npx drizzle-kit migrate && npm start
 
   postgres-db:
     image: postgres:13.5
@@ -21,6 +30,8 @@ services:
       - '5432:5432'
     volumes:
       - postgres-data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    entrypoint: ['docker-entrypoint.sh', 'postgres']
 
 volumes:
   postgres-data:

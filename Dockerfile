@@ -16,8 +16,11 @@ COPY . .
 # Build the app.
 RUN npm run build
 
+# Run migrations
+RUN npx drizzle-kit migrate
+
 # Expose the port the app runs on.
 EXPOSE 3000
 
 # Start the application.
-CMD ["npm", "start"]
+CMD ["npm","run", "start"]
