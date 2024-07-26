@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1721802571329,
+      "tag": "0000_steep_dakota_north",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1721808954550,
+      "tag": "0001_swift_senator_kelly",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1721810462707,
+      "tag": "0002_supreme_fallen_one",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1721811732094,
+      "tag": "0003_far_cannonball",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1721813940804,
+      "tag": "0004_handy_jazinda",
+      "breakpoints": true
+    }
+  ]
+}

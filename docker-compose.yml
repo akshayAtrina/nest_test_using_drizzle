@@ -1,0 +1,14 @@
+# docker-compose.yml
+version: '3.8'
+services:
+  test-app-dev:
+    image: postgres:13.5
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: pass@123
+      POSTGRES_DB: test_db
+    ports:
+      - '5434:5432'
+volumes:
+  postgres:
