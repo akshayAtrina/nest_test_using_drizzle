@@ -10,8 +10,8 @@ services:
         value: super-secret
       - key: PORT
         value: '3000'
-    buildCommand: docker build -t nestjs-app .
-    startCommand: docker run -p 3000:3000 nestjs-app
+    buildCommand: docker-compose build
+    startCommand: docker-compose up -d
     ports:
       - port: 3000
         name: http
