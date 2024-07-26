@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: nestjs-app
+    env: docker
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        value: postgres://admin:pass@123@postgres-db:5432/test_db
+      - key: JWT_SECRET
+        value: super-secret
+      - key: PORT
+        value: '3000'
+    buildCommand: docker-compose build
+    startCommand: docker-compose up
+    ports:
+      - port: 3000
+        name: http
+
+  - type: database
+    name: postgres-db
+    plan: free
+    databaseType: postgres
+    envVars:
+      - key: POSTGRES_USER
+        value: admin
+      - key: POSTGRES_PASSWORD
+        value: pass@123
+      - key: POSTGRES_DB
+        value: test_db
+    ports:
+      - port: 5432
+        name: postgres

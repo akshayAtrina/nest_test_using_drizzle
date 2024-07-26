@@ -1,8 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { UserWebsocketGateWay } from 'src/gateway/user_websocket.gateway';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('auth')
 @ApiTags('Authentication')
