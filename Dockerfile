@@ -16,9 +16,6 @@ COPY . .
 # Build the app.
 RUN npm run build
 
-# Run migrations
-RUN npx drizzle-kit migrate
-
 # Expose the port the app runs on.
 EXPOSE 3000
 
