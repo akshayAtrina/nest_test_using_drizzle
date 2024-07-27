@@ -2,21 +2,24 @@ import { Module, Global } from '@nestjs/common';
 import { Pool } from 'pg';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import * as schema from './schema';
+import { ConfigService } from '@nestjs/config';
 
-@Global() // Make this module globally available
+@Global()
 @Module({
   providers: [
     {
       provide: 'DRIZZLE',
-      useFactory: () => {
+      useFactory: async (config: ConfigService) => {
         const pool = new Pool({
-          connectionString:
-            'postgresql://admin:pass@123@localhost:5432/test_db',
-          // connectionString:
-          //   'postgres://admin:pass@123@postgres-db:5432/test_db',
+          user: config.get('DB_USER'),
+          host: config.get('DB_HOST'),
+          database: config.get('DB_NAME'),
+          password: config.get('DB_PASS'),
+          port: Number(config.get('DB_PORT')),
         });
         return drizzle(pool, { schema, logger: true });
       },
+      inject: [ConfigService], // Inject ConfigService here
     },
   ],
   exports: ['DRIZZLE'],
