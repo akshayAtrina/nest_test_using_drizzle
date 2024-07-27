@@ -13,7 +13,11 @@ async function getDrizzleConfig() {
     dialect: 'postgresql',
     dbCredentials: {
       url: databaseUrl,
+      ssl: {
+        rejectUnauthorized: false, // Set to true if you have a valid certificate chain
+      },
     },
+
     verbose: true,
     strict: true,
   });

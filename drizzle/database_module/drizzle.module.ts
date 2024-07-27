@@ -16,6 +16,9 @@ import { ConfigService } from '@nestjs/config';
           database: config.get('DB_NAME'),
           password: config.get('DB_PASS'),
           port: Number(config.get('DB_PORT')),
+          ssl: {
+            rejectUnauthorized: false, // Set to true if you have a valid certificate chain
+          },
         });
         return drizzle(pool, { schema, logger: true });
       },
