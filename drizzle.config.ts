@@ -1,11 +1,22 @@
 import { defineConfig } from 'drizzle-kit';
-export default defineConfig({
-  schema: './drizzle/database_module/schema.ts',
-  dialect: 'postgresql',
-  dbCredentials: {
-    // url: 'postgres://admin:pass@123@postgres-db:5432/test_db',
-    url: 'postgresql://admin:pass@123@localhost:5432/test_db',
-  },
-  verbose: true,
-  strict: true,
-});
+import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from 'src/app.module';
+
+async function getDrizzleConfig() {
+  const app = await NestFactory.createApplicationContext(AppModule);
+  const configService = app.get(ConfigService);
+  const databaseUrl = configService.get<string>('DB_URL');
+
+  return defineConfig({
+    schema: './drizzle/database_module/schema.ts',
+    dialect: 'postgresql',
+    dbCredentials: {
+      url: databaseUrl,
+    },
+    verbose: true,
+    strict: true,
+  });
+}
+
+export default getDrizzleConfig();
